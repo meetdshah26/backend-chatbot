@@ -19,10 +19,12 @@ const ADMIN_CREDENTIALS = {
 export const login = async (req: Request, res: Response) => {
   try {
     const { username, password } = req.body;
+console.log(username);
+console.log(password);
 
     if (
-      username === ADMIN_CREDENTIALS.username &&
-      password === ADMIN_CREDENTIALS.password
+      username == ADMIN_CREDENTIALS.username &&
+      password == ADMIN_CREDENTIALS.password
     ) {
       const token = jwt.sign({ username, role: "admin" }, JWT_SECRET, {
         expiresIn: "24h",
