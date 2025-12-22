@@ -1,4 +1,3 @@
-// src/server.ts
 import express, { Application } from "express";
 import http from "http";
 import { Server } from "socket.io";
@@ -53,7 +52,6 @@ const startServer = async () => {
 
     await sequelize.sync({ alter: process.env.NODE_ENV === "development" });
 
-    console.log("Database synchronized.");
 
     server.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);

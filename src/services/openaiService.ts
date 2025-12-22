@@ -1,4 +1,3 @@
-// src/services/openaiService.ts
 import OpenAI from "openai";
 import Message  from "../models/Message";
 

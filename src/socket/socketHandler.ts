@@ -14,7 +14,6 @@ const typingUsers = new Map<string, boolean>(); // sessionId -> isTyping
 
 export const setupSocketIO = (io: Server) => {
   io.on("connection", async (socket: UserSocket) => {
-    console.log("New client connected:", socket.id);
 
     // Handle user initialization
     socket.on(
@@ -90,7 +89,6 @@ export const setupSocketIO = (io: Server) => {
             timestamp: new Date(),
           });
 
-          console.log(`User initialized: ${sessionId}, Chat ID: ${chat.id}`);
         } catch (error) {
           console.error("Error initializing user:", error);
           socket.emit("error", { message: "Failed to initialize chat" });
@@ -131,9 +129,6 @@ export const setupSocketIO = (io: Server) => {
           sessionId: socket.sessionId,
         });
 
-        console.log(
-          `Message sent from user ${socket.sessionId}: ${data.message}`
-        );
       } catch (error) {
         console.error("Error sending message:", error);
         socket.emit("error", { message: "Failed to send message" });
@@ -165,9 +160,6 @@ export const setupSocketIO = (io: Server) => {
           // Confirm to admin
           socket.emit("messageSent", messageData);
 
-          console.log(
-            `Admin message sent to chat ${data.chatId}: ${data.message}`
-          );
         } catch (error) {
           console.error("Error sending admin message:", error);
           socket.emit("error", { message: "Failed to send message" });
@@ -185,8 +177,7 @@ export const setupSocketIO = (io: Server) => {
     });
 
     socket.on("adminTyping", (data: { chatId: number; isTyping: boolean }) => {
-       console.log("ADMIN TYPING:", data);
-       
+
       io.to(`chat_${data.chatId}`).emit("adminTypingStatus", {
         isTyping: data.isTyping,
       });
@@ -194,7 +185,6 @@ export const setupSocketIO = (io: Server) => {
 
     // Handle disconnect
     socket.on("disconnect", async () => {
-      console.log("Client disconnected:", socket.id);
 
       if (socket.sessionId) {
         activeUsers.delete(socket.sessionId);
