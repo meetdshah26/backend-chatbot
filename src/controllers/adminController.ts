@@ -8,9 +8,9 @@ import { Op } from "sequelize";
 if (!process.env.JWT_SECRET) {
   throw new Error("JWT_SECRET is not defined");
 }
-const JWT_SECRET = process.env.JWT_SECRET";
+const JWT_SECRET = process.env.JWT_SECRET;
 
-if (!process.env.ADMIN_USERNAM || !process.env.ADMIN_PASSWORD) {
+if (!process.env.ADMIN_USERNAME || !process.env.ADMIN_PASSWORD) {
   throw new Error("ADMIN_CREDENTIALS is not defined");
 }
 // Simple hardcoded admin credentials (in production, use hashed passwords)
