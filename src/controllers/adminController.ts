@@ -1,26 +1,27 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
-// import { User, Chat, Message } from "../models";
 import User from "../models/User";
 import Chat from "../models/Chat";
 import Message from "../models/Message";
 import { Op } from "sequelize";
 
-const JWT_SECRET =
-  process.env.JWT_SECRET || "your-secret-key-change-in-production";
+if (!process.env.JWT_SECRET) {
+  throw new Error("JWT_SECRET is not defined");
+}
+const JWT_SECRET = process.env.JWT_SECRET";
 
+if (!process.env.ADMIN_USERNAM || !process.env.ADMIN_PASSWORD) {
+  throw new Error("ADMIN_CREDENTIALS is not defined");
+}
 // Simple hardcoded admin credentials (in production, use hashed passwords)
 const ADMIN_CREDENTIALS = {
-  // username: process.env.ADMIN_USERNAME || "admin",
-  username: process.env.ADMIN_USERNAME || "meetdshah98@gmail.com",
-  password: process.env.ADMIN_PASSWORD || "123",
+  username: process.env.ADMIN_USERNAM,
+  password: process.env.ADMIN_PASSWORD,
 };
 
 export const login = async (req: Request, res: Response) => {
   try {
     const { username, password } = req.body;
-console.log(username);
-console.log(password);
 
     if (
       username == ADMIN_CREDENTIALS.username &&
