@@ -15,7 +15,7 @@ if (!process.env.ADMIN_USERNAME || !process.env.ADMIN_PASSWORD) {
 }
 // Simple hardcoded admin credentials (in production, use hashed passwords)
 const ADMIN_CREDENTIALS = {
-  username: process.env.ADMIN_USERNAM,
+  username: process.env.ADMIN_USERNAME,
   password: process.env.ADMIN_PASSWORD,
 };
 
